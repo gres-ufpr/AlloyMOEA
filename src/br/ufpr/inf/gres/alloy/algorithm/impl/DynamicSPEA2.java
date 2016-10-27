@@ -1,6 +1,5 @@
 package br.ufpr.inf.gres.alloy.algorithm.impl;
 
-import java.util.List;
 import br.ufpr.inf.gres.alloy.algorithm.components.impl.archiving.RankingAndDiversityArchiving;
 import br.ufpr.inf.gres.alloy.algorithm.components.impl.diversity.KthNearestNeighbor;
 import br.ufpr.inf.gres.alloy.algorithm.components.impl.initialization.RandomInitialization;
@@ -13,7 +12,6 @@ import br.ufpr.inf.gres.alloy.algorithm.components.impl.selection.OnlyArchiveSel
 import br.ufpr.inf.gres.alloy.algorithm.components.impl.stoppingcondition.MaxEvaluationsCondition;
 import org.uma.jmetal.operator.CrossoverOperator;
 import org.uma.jmetal.operator.MutationOperator;
-import org.uma.jmetal.operator.SelectionOperator;
 import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.solution.Solution;
 import org.uma.jmetal.util.evaluator.SolutionListEvaluator;

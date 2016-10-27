@@ -59,7 +59,6 @@ public abstract class AbstractDynamicGeneticAlgorithm<S extends Solution<?>> ext
         this.trackingImplementation = trackingImplementation;
     }
 
-    // <editor-fold defaultstate="collapsed" desc="Getters & Setters">
     public Problem<S> getProblem() {
         return problem;
     }
@@ -171,9 +170,7 @@ public abstract class AbstractDynamicGeneticAlgorithm<S extends Solution<?>> ext
     public void setTrackingImplementation(TrackingImplementation trackingImplementation) {
         this.trackingImplementation = trackingImplementation;
     }
-    // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Current Progress">
     @Override
     protected void initProgress() {
         this.initProgress(0);
@@ -199,37 +196,27 @@ public abstract class AbstractDynamicGeneticAlgorithm<S extends Solution<?>> ext
     public void setCurrentProgress(int state) {
         progressImplementation.setCurrentProgress(state);
     }
-    // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Stopping Condition">
     @Override
     protected boolean isStoppingConditionReached() {
         return stoppingConditionImplementation.isStoppingConditionReached(getCurrentProgress());
     }
-    // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Population Initialization">
     @Override
     protected List<S> createInitialPopulation() {
         return populationInitializationImplementation.createInitialPopulation(problem, populationSize);
     }
-    //</editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Population Evaluation">
     @Override
     protected List<S> evaluatePopulation(List<S> population) {
         return solutionListEvaluator.evaluate(population, problem);
     }
-    // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Parent Selection">
     @Override
     protected List<S> selection(List<S> parents) {
         return selectionImplementation.selection(new ArrayList(parents), new ArrayList(getArchive()), selectionOperator);
     }
-    // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Reproduction">
     @Override
     protected List<S> reproduction(List<S> matingPopulation) {
         return this.reproduction(matingPopulation, populationSize);
@@ -238,16 +225,12 @@ public abstract class AbstractDynamicGeneticAlgorithm<S extends Solution<?>> ext
     protected List<S> reproduction(List<S> matingPopulation, int offspringSize) {
         return reproductionImplementation.reproduction(new ArrayList(matingPopulation), offspringSize, crossoverOperator, mutationOperator);
     }
-    // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Replacement">
     @Override
     protected List<S> replacement(List<S> population, List<S> offspringPopulation) {
         return replacementImplementation.replacement(new ArrayList(population), new ArrayList(offspringPopulation), populationSize);
     }
-    // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Archiving">
     protected int archive(List<S> population) {
         if (archivingImplementation != null) {
             return archivingImplementation.updateArchive(population);
@@ -263,9 +246,7 @@ public abstract class AbstractDynamicGeneticAlgorithm<S extends Solution<?>> ext
             return new ArrayList<>();
         }
     }
-    // </editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Get Results">
     @Override
     public List<S> getResult() {
         return SolutionListUtils.getNondominatedSolutions(getResultWithDominatedSolutions());
@@ -278,15 +259,12 @@ public abstract class AbstractDynamicGeneticAlgorithm<S extends Solution<?>> ext
             return getArchive();
         }
     }
-    //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Tracking">
     public void trackProgress() {
         if (trackingImplementation != null) {
             trackingImplementation.trackProgress(this);
         }
     }
-    //</editor-fold>
 
     @Override
     public abstract void run();
